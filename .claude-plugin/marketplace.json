@@ -1,0 +1,16 @@
+{
+  "name": "skydeo",
+  "description": "Skydeo's Claude Code plugins.",
+  "owner": {
+    "name": "Skydeo, Inc."
+  },
+  "plugins": [
+    {
+      "name": "saw",
+      "description": "Skydeo Agentic Workflow (SAW) — Claude Code skills that cut raw ideas into shipped code.",
+      "category": "development",
+      "source": "./plugins/saw",
+      "homepage": "https://github.com/skydeo-aviato/saw"
+    }
+  ]
+}

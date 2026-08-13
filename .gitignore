@@ -1,0 +1,13 @@
+.DS_Store
+skills-lock.json
+.claude/settings.local.json
+.mise.toml
+opencode.jsonc
+node_modules/
+
+# Working notes — map, decision tickets, research. Not shipped.
+.scratch/
+
+# Artifact sources and build output — kept out of the plugin repo
+*.html
+dist/
