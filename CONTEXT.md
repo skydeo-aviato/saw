@@ -140,11 +140,20 @@ findings so far and the help wanted onto the item before the assignee changes, a
 a helper hands the item back the same way.
 _Avoid_: Handover, delegation (which in Linear means the unused `delegate` field)
 
+**Babysit**:
+Tending a filed PR until nothing is left for the agent to do — attending every
+review thread, Greptile's and humans', fixing CI, and driving re-reviews until
+the review is clean or the effort is exhausted. Approval stays human; merge only
+on the user's explicit in-session confirmation.
+_Avoid_: Shepherd, nurse, PR automation
+
 **AFK**:
 Nobody is in the session. **Unmarked everywhere, deliberately.** The agent has no
 identity of record: a session's Linear writes carry the human driving it, and
 every issue names the human on the hook for it, whether or not they watched the
-work happen. One agent seat exists — **klawdeo** (full name `Claude Opus`; one
+work happen. Disclosure on outward surfaces — babysit's attribution banner naming
+the model and the human it acts for — is not an identity of record: the human
+stays the party of record. One agent seat exists — **klawdeo** (full name `Claude Opus`; one
 account, two renderings) — live only as Claude Tag's read-only instrument. It was
 retired from the assignee convention because an assignee that holds nothing is
 not a baton, and it files nothing since intake moved to Asks. The GitHub

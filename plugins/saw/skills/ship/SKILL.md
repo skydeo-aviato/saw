@@ -1,48 +1,29 @@
 ---
 name: ship
-description: Open a pull request for finished work and resolve every review thread on it.
+description: File a concise pull request. Use when the user asks to ship, file, open, or create a pull request.
 disable-model-invocation: true
 ---
 
-# Ship
+# File a Pull Request
 
-Ours — there is no upstream body, and **the contract is this body**. The tracker doc adds only the
-stop-and-ask rules that bind it: `../../references/linear.md` §7.
+Before filling, check whether a PR for this issue already exists. Review the diff locally against `origin/master` to make sure its contents match the goal.
 
-## 1. Tick the acceptance criteria
+PR titles usually become commit messages, so follow the repository's title conventions. Look at recently merged PRs and Git history for examples. Prefer a concise, human-readable title that explains why the change matters:
 
-Go through the boxes on the Linear issue and tick what is genuinely done. **If one cannot honestly be
-ticked, stop and name it.**
+BAD:
+> perf(server): Negotiate peemessage-deflate on the websocket
+GOOD:
+> perf(server): Cut websocket frame size by 70%+ with gzipping
 
-This is the whole spec check. The only other one is the author verifying in production, and merge
-deploys to production.
+Open the description with a simple explanation of the problem based on the user's original prompt, then briefly explain the solution. Do not lead with an implementation inventory.
 
-## 2. Check the changeset
+BAD:
+> Removed implicit workspace
+carry-over from every "new thread" entry point (cmd
+cmd+shift+o, sidebar v1/v2 buttons, command palette). New threads inherit only the project from context; branch, worktree, and env mode always come from the configured defaults. Deleted buildContextualThreadOptions,
+startNewThreadInProjectFromContext, and the v1 sidebar's seed-context machinery.
+GOOD:
+> My "new worktree" default was ignored when starting new threads on existing
+worktrees. Super unintuitive. Now your preferences always apply.
 
-If the work touched `plugins/saw/**`, there must be a changeset in `.changeset/`. **No changeset, stop
-and say so** — `pnpm changeset` writes one.
-
-**Never hand-edit a version.** `package.json` and `plugin.json` are both changesets'; a human cuts the
-release from `master` with `pnpm run version`. `pnpm run sync version --check` reports drift.
-
-## 3. Open it
-
-**Ready for review**, so the automation reads it as reviewable — a draft moves the issue back to
-`In Progress`.
-
-**One GitHub label: the Change class, read from the Linear issue.** The issue already carries exactly
-one of `feat` / `fix` / `refactor` / `chore`; copy it. Area labels stay free and human.
-
-Title and body are plain descriptions. The branch already carries the key.
-
-## 4. Resolve the threads
-
-Reply on every open review thread with proper feedback (+1, -1), whoever left it.
-
-## Where this stops
-
-**Linear state belongs to the Git automations**, review is **the author's call** to request, and
-**merging is the human's act**. Leave all three alone.
-
-Nothing enforces that last one — no ruleset, no required approval. It is a contract, which is why it
-is written down rather than assumed.
+Open real PRs instead of draft ones so the review bots run. If the user also asks to babysit it , continue with the `babysit` skill.
