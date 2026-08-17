@@ -1,7 +1,6 @@
 ---
 name: ship
 description: File a concise pull request. Use when the user asks to ship, file, open, or create a pull request.
-disable-model-invocation: true
 ---
 
 # File a Pull Request
