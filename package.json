@@ -1,7 +1,7 @@
 {
   "name": "@skydeo-aviato/saw",
   "description": "Skydeo Agentic Workflow (SAW) — Claude Code skills that cut raw ideas into shipped code.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "engines": {
