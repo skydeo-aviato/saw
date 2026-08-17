@@ -1,15 +1,9 @@
 ---
 name: capture
-description: Capture a raw idea into Linear Triage.
+description: Capture a raw idea into Linear Triage. Use when the user asks to capture an idea.
 ---
 
 # Capture
-
-**Done when a triager can act on the issue without coming back to you.**
-
-This is self-intake: you are the requester, and the session's MCP files as you, so `createdBy`
-already names the right human. A request from someone outside the team belongs in the Linear Asks
-lane in Slack — send them there.
 
 ## 1. Resolve the product
 
@@ -63,6 +57,3 @@ value.
 
 **Ask at most one question before filing.** Which surface, or how they will know it works — and only
 when it is genuinely open. A thin issue beats an interrogation; the rest is settled at triage.
-
-**Derived work goes elsewhere.** Decision tickets, implementation issues and anything belonging to an
-existing map are already classified. `/shape` and `/slice` write those.

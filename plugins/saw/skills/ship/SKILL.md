@@ -26,3 +26,5 @@ GOOD:
 worktrees. Super unintuitive. Now your preferences always apply.
 
 Open real PRs instead of draft ones so the review bots run. If the user also asks to babysit it , continue with the `babysit` skill.
+
+Make sure PRs have all required metadata filled out
