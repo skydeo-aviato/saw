@@ -1,5 +1,16 @@
 # @skydeo-aviato/saw
 
+## 0.3.0
+
+### Minor Changes
+
+- 7d134ce: New `/saw:babysit` command: given a PR link or ID, it tends the PR — verifying and answering review-bot and human comments, fixing CI — until checks and reviews are green; merge happens only on the user's explicit ask.
+
+### Patch Changes
+
+- f9ed3d2: Allow agents to invoke `/saw:ship` directly by removing its `disable-model-invocation` flag.
+- 7d134ce: Rewrote `/saw:ship` and `/saw:babysit` as short, tool-agnostic instructions: ship focuses on PR title/description quality, babysit on verifying bot findings before acting — dropping the Greptile score loop and 5-iteration cap.
+
 ## 0.2.0
 
 ### Minor Changes
