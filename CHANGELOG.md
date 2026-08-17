@@ -8,6 +8,7 @@
 
 ### Patch Changes
 
+- 7d1bad8: Trimmed `/saw:capture` to its core intake flow (dropped the self-intake preamble and derived-work note, added an invocation trigger to its description) and told `/saw:ship` to fill out all required PR metadata.
 - f9ed3d2: Allow agents to invoke `/saw:ship` directly by removing its `disable-model-invocation` flag.
 - 7d134ce: Rewrote `/saw:ship` and `/saw:babysit` as short, tool-agnostic instructions: ship focuses on PR title/description quality, babysit on verifying bot findings before acting — dropping the Greptile score loop and 5-iteration cap.
 
