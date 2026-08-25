@@ -1,7 +1,8 @@
 {
   "name": "@skydeo-aviato/saw",
-  "description": "Skydeo Agentic Workflow (SAW) — Claude Code skills that cut raw ideas into shipped code.",
-  "version": "0.3.0",
+  "description": "The curated set of Claude Code skills the Skydeo team uses day to day. Mostly Matt Pocock's engineering skills plus Lauren Tan's unslop, redistributed unchanged. Skydeo wrote only ship and babysit. See ATTRIBUTION.md.",
+  "version": "0.1.0",
+  "license": "MIT",
   "private": true,
   "type": "module",
   "engines": {
@@ -9,9 +10,7 @@
   },
   "scripts": {
     "changeset": "changeset",
-    "version": "changeset version && node scripts/sync.mjs version",
-    "sync": "node scripts/sync.mjs",
-    "release": "node scripts/tag-release.mjs"
+    "version": "changeset version"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.0"

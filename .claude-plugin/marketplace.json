@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "saw",
-      "description": "Skydeo Agentic Workflow (SAW) — Claude Code skills that cut raw ideas into shipped code.",
+      "description": "The curated set of Claude Code skills the Skydeo team uses day to day. Mostly Matt Pocock's engineering skills plus Lauren Tan's unslop, redistributed unchanged. Skydeo wrote only ship and babysit. See ATTRIBUTION.md.",
       "category": "development",
       "source": "./plugins/saw",
       "homepage": "https://github.com/skydeo-aviato/saw"
