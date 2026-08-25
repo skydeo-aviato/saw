@@ -207,12 +207,28 @@ set was reshaped. Everything else is minor or patch.
 The bump is not the release. Cut one from `main`:
 
 ```bash
+V=0.2.0                                     # the version you are cutting
+
 pnpm run version                            # bump package.json, write the CHANGELOG
-# then edit plugins/saw/.claude-plugin/plugin.json to the same version, by hand
-git commit -am "chore(release): <version>"
-git tag v<version> && git push origin v<version>
-gh release create v<version> --notes-file <(...)   # notes from CHANGELOG.md
+# then edit plugins/saw/.claude-plugin/plugin.json to $V, by hand
+git commit -am "chore(release): $V"
+
+git tag -s "v$V" -m "v$V"                   # -s, or you get a lightweight unsigned tag
+git push origin "v$V"
+
+awk -v v="## $V" '$0==v{f=1;next} /^## /{f=0} f' CHANGELOG.md > /tmp/notes.md
+gh release create "v$V" --title "saw $V" --notes-file /tmp/notes.md
 ```
+
+Three details in there are the ones that bite, all learned the hard way:
+
+- **`git tag -s`, not `git tag`.** Plain `git tag` makes a lightweight tag, which cannot carry a
+  signature at all, and `tag.gpgsign` does not change that. Only annotated tags get signed.
+- **Extract the notes to a real file and check it is not empty.** `gh release create` accepts an
+  empty `--notes-file` without complaining and publishes a release with a blank body. If that
+  happens, `gh release edit "v$V" --notes-file /tmp/notes.md` fixes it after the fact.
+- **The `awk` above is deliberate.** The obvious `sed` range for this is not portable; the BSD
+  `sed` on macOS rejects it.
 
 Copying the version into `plugin.json` is the step to watch. Claude Code keys the plugin cache on
 that file, so a version that lands only in `package.json` reaches nobody, and nothing checks the two
@@ -228,5 +244,12 @@ plugin dependencies against `saw--v<version>` tags only. We publish `v<version>`
 a dependency on `saw` by version range. Ordinary marketplace installs track the marketplace entry
 rather than tags, so they are unaffected.
 
-`main` requires signed commits. History-rewriting commands drop signatures without saying so, so
-check with `git log --show-signature` before opening a pull request.
+`main` requires signed commits, and history-rewriting commands drop signatures without saying so.
+Do not verify with `git log --show-signature`: with SSH signing it reports `No signature` for a
+commit that is correctly signed, unless `gpg.ssh.allowedSignersFile` happens to be configured
+locally. It is a local verification gap, not a signing failure. Check that the signature exists
+instead:
+
+```bash
+git cat-file commit HEAD | grep -q '^gpgsig' && echo signed
+```
