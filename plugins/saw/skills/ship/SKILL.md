@@ -5,12 +5,25 @@ description: File a concise pull request. Use when the user asks to ship, file, 
 
 # File a Pull Request
 
-Before filling, check whether a PR for this issue already exists. Review the diff locally against `origin/master` to make sure its contents match the goal.
+Before filling, check whether a PR for this issue already exists. Review the diff locally against the
+repository's default branch to make sure its contents match the goal.
+
+Resolve that branch, never assume it. Some repos are on `main` and some on `master`, and a hardcoded
+base silently diffs against nothing:
+
+```bash
+git symbolic-ref --quiet --short refs/remotes/origin/HEAD | sed 's#^origin/##'
+```
+
+If that prints nothing, the remote HEAD was never fetched. Run `git remote set-head origin --auto`
+and retry. Diff with three dots, `git diff origin/<base>...HEAD`, so the comparison is against the
+merge-base rather than whatever else has landed on the base since.
 
 PR titles usually become commit messages, so follow the repository's title conventions. Look at recently merged PRs and Git history for examples. Prefer a concise, human-readable title that explains why the change matters:
 
 BAD:
 > perf(server): Negotiate peemessage-deflate on the websocket
+
 GOOD:
 > perf(server): Cut websocket frame size by 70%+ with gzipping
 
@@ -21,6 +34,7 @@ BAD:
 carry-over from every "new thread" entry point (cmd
 cmd+shift+o, sidebar v1/v2 buttons, command palette). New threads inherit only the project from context; branch, worktree, and env mode always come from the configured defaults. Deleted buildContextualThreadOptions,
 startNewThreadInProjectFromContext, and the v1 sidebar's seed-context machinery.
+
 GOOD:
 > My "new worktree" default was ignored when starting new threads on existing
 worktrees. Super unintuitive. Now your preferences always apply.

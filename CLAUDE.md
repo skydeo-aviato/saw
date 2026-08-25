@@ -1,37 +1,29 @@
-## Versioning
+Read `CONTEXT.md` for the vocabulary and `docs/adr/` for the decisions that bind. Output that
+contradicts an ADR says so rather than quietly overriding it.
 
-Changesets owns the version in `package.json` and `plugins/saw/.claude-plugin/plugin.json`. Never
-hand-edit either.
+## Five rules
 
-Every change under `plugins/saw/**` carries a changeset — `pnpm changeset`, one line a reader outside
-this session would understand. `/implement` writes it; `/ship` refuses a pull request without one.
+**Almost nothing here is ours.** 23 of the 25 skills in `plugins/saw/skills/` are copies of other
+people's work. Only `ship` and `babysit` may be edited. A change wanted in any other skill
+goes upstream, because a local edit is invisible and the next copy reverts it.
 
-**Major** means an invocable command removed or renamed, or the installed surface reshaped.
-Everything else is minor or patch.
+**Never claim authorship**, in a manifest, a README, or a skill. `plugins/saw/ATTRIBUTION.md` is the
+record of who wrote what and where it came from. Copying a skill without updating it makes that
+record a lie.
 
-Claude Code keys the plugin cache on `plugin.json`, so a version landing only in `package.json` reaches
-nobody. `pnpm run check-plugin-version` reports that **drift**.
+**Every change under `plugins/saw/**` carries a changeset.** `pnpm changeset`, one line a reader
+outside this session would understand. Nothing enforces this. Major means a command was removed or
+renamed, or the installed set was reshaped.
 
-**Cutting a release** — the tag format, the GitHub release, and why the bump alone ships nothing:
-README, "Working on SAW itself".
+**Never hand-edit a version**, apart from the one release step that needs it. See the README.
 
-## Vendored upstream
+**No tracker config in the plugin.** No tracker, team, label registry, or workflow hardcoded into
+`plugins/saw/**`. Upstream's skills are tool-agnostic and `/saw:setup-matt-pocock-skills` answers
+those questions per repo. Hardcoding one makes the plugin work in exactly one repo.
 
-`pnpm run sync-vendor` regenerates the vendored upstream from `plugins/saw/vendor-manifest.json`
-(upstream repo, pinned ref, whitelist) — the manifest is the only input, and the sync
-delete-and-recreates everything it owns: `plugins/saw/vendor/` wholly, plus the inherited skill
-directories in `plugins/saw/skills/` named by the manifest's `registered` list. Never hand-edit
-any of those paths; edit the manifest and rerun the sync. Upgrade = edit `upstream.ref`, rerun,
-review the diff. Un-kill = one-line whitelist edit, rerun.
+## Procedures
 
-**Registration is placement.** `plugins/saw/skills/` is auto-discovered — every directory there
-is a registered command, and the directory listing is the registry; `plugins/saw/vendor/` is
-never scanned, its bodies reached only by path from overlays. There is no `skills` array in the
-plugin manifest.
+Both live in the README so they load only when needed: "Adding or upgrading a skill", and
+"Releasing".
 
-### Domain docs
-
-Single-context — one `CONTEXT.md` (the glossary) and one `docs/adr/` (the decisions) at the root.
-Read both before exploring: the glossary's terms are the vocabulary for anything you write (issue
-titles, hypotheses, test names — never the synonyms it avoids), and ADRs touching your area bind.
-Output that contradicts an ADR surfaces the conflict explicitly rather than silently overriding.
+There is no build and no sync script. Copying markdown between repositories is `cp`.

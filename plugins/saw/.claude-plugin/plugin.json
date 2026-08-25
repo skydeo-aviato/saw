@@ -1,8 +1,18 @@
 {
   "name": "saw",
-  "version": "0.3.0",
-  "description": "Skydeo Agentic Workflow (SAW)",
+  "version": "0.1.0",
+  "description": "The curated set of Claude Code skills the Skydeo team uses day to day. Mostly Matt Pocock's engineering skills plus Lauren Tan's unslop, redistributed unchanged. Skydeo wrote only ship and babysit. See ATTRIBUTION.md.",
   "author": {
-    "name": "Skydeo, Inc."
-  }
+    "name": "Skydeo, Inc.",
+    "url": "https://github.com/skydeo-aviato/saw"
+  },
+  "homepage": "https://github.com/skydeo-aviato/saw",
+  "repository": "https://github.com/skydeo-aviato/saw",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "engineering",
+    "workflow",
+    "curated"
+  ]
 }

@@ -1,13 +1,15 @@
 ---
 name: implement
-description: Build one work item against its spec, in its own worktree.
+description: "Implement a piece of work based on a spec or set of tickets."
 disable-model-invocation: true
 ---
 
-1. Create the work item's worktree per `../../references/worktree.md`, and work inside it.
-2. Follow `../../vendor/mattpocock/skills/engineering/implement/SKILL.md`.
-3. Write the changeset if the work touched `plugins/saw/**` — `pnpm changeset`, one line a reader
-   outside this session would understand. **Never hand-edit a version.**
-4. `/ship` when it is done.
+Implement the work described by the user in the spec or tickets.
 
-Issue status is yours to set at start — `../../references/linear.md` §6.4.
+Use /tdd where possible, at pre-agreed seams.
+
+Run typechecking regularly, single test files regularly, and the full test suite once at the end.
+
+Once done, use /code-review to review the work.
+
+Commit your work to the current branch.
