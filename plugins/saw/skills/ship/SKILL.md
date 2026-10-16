@@ -166,7 +166,7 @@ the failed files.
 ## 8. Verify the posted body
 
 ```bash
-gh pr view <number> --json body --jq .body | grep -c 'github.com/user-attachments/assets/'
+gh pr view <number> --json body --jq .body | grep -cE '(^|\]\()https://github\.com/user-attachments/assets/'
 ```
 
 The count equals the number of files you attached. Open the PR and check each image and video
