@@ -1,19 +1,30 @@
 # PR body template
 
-Fill every section, in this order. Keep prose short and plain; skip preambles. The guidance under
-each heading is for you, not the reader: delete it from the posted body.
+Fill every section, in this order. The guidance under each heading is for you, not the reader:
+delete it from the posted body. Write short declarative sentences in sentence case, with no long
+dashes, no slashes for "or", and no bold label followed by a colon. Under pstack, run
+`/technical-writing` and `/unslop` over the result.
 
 ```markdown
 ## Problem
 
-**What's wrong:** <who is hurt and how, in product terms> Ticket: <[what it is (ID)](url)>. Source: <[where it was reported](url)>.
+### What's wrong
 
-**Why it matters to us:** <one or two sentences on the business or team cost, tied to a real goal>
+<who is hurt and how, in product terms> <[what the ticket is (ID)](url)> <[where it was reported](url)>
+
+### Why it matters to us
+
+<one or two sentences on the business or team cost, tied to a real goal>
 
 ## Change
 
-**Before:** <what the user or caller sees today>
-**After:** <what they see with this PR>
+### Before
+
+<what the user or caller sees today>
+
+### After
+
+<what they see with this PR>
 
 ## Picture
 
@@ -21,33 +32,37 @@ each heading is for you, not the reader: delete it from the posted body.
 
 ## Evidence
 
-<before and after from the real system>
+<before and after from the real system, and what each attached file proves>
 
 ## Risk
 
-**Door:** <one-way or two-way>, <why>
-**Blast radius:** <who or what could break>
-**Rollback:** <the exact step that undoes it>
+- <One-way or two-way> door. <why>
+- Blast radius. <who or what could break>
+- Rollback. <the exact step that undoes it>
 
 ## Where to look
 
-<the files, functions, or decisions that deserve the reviewer's attention, and why>
+<the places a mistake would hide, the decisions you are least sure of, and alternatives you rejected>
 
 ## Scope
 
 <what this PR leaves out, each item with [the ticket it went to (ID)](url)>
 ```
 
+`--attach` adds the screenshots and video after Scope.
+
 ## Problem
 
 Write for someone who has never used the feature. "Partners lose their saved segment filter on every
-reload", not "fix filter state hydration". No ticket: say so and link the conversation, incident, or
-message the request came from. "Why it matters" names a goal the team actually holds (a launch, a
-customer, an SLA, review time), not "improves code quality".
+reload", not "fix filter state hydration". With no ticket, say so and link the conversation,
+incident, or message the request came from. "Why it matters" names a goal the team actually holds (a
+launch, a customer, an SLA, review time), not "improves code quality". No SHAs and no rebase history
+here.
 
 ## Change
 
-Behaviour only, as the user or caller experiences it. Implementation belongs in Picture.
+Behaviour only, as the user or caller experiences it. Name both sides of a rename or retarget.
+Implementation belongs in Picture.
 
 ## Picture
 
@@ -76,22 +91,26 @@ From the real system, before on the base and after on this branch. "Tests pass" 
 evidence.
 
 - Backend, API, CLI: fenced `console` captures of the real request and response, before and after.
-- UI: screenshots or video in which the change is visibly working, each looked at before posting.
-  Put before and after side by side in a table when they are screenshots of the same screen.
+- UI: one line per attached screenshot or video naming what it shows. The files themselves follow
+  Scope.
+- Perf: one primary number with its unit, `before → after`.
 
-Add the test that failed before and passes now as support, named in one line.
+Add the test that failed before and passes now as support, named in one line. Link the PR comment
+that holds anything bulky.
 
 ## Risk
 
-A **two-way door** is cheap to walk back (revert the merge); a **one-way door** is not (data
-migrations, deleted data, published API contracts, sent emails, external side effects). Blast
-radius: consider every consumer: other services, layout on mobile, existing data, scheduled jobs.
-Rollback is a concrete step, including anything a revert alone does not undo.
+A two-way door is cheap to walk back (revert the merge). A one-way door is not: data migrations,
+deleted data, published API contracts, sent emails, external side effects. For blast radius,
+consider every consumer, including other services, layout on mobile, existing data, and scheduled
+jobs. If trunk is red, state the cost of leaving it red. Rollback is a concrete step, including
+anything a revert alone does not undo.
 
 ## Where to look
 
-Point the reviewer at the two or three places where a mistake would hide, and the decisions you are
-least sure of. "Everything is straightforward" is a valid entry only when it is true.
+Point the reviewer at the two or three places where a mistake would hide, the decisions you are
+least sure of, and the alternatives a reviewer would otherwise ask about, with why they lost.
+"Everything is straightforward" is a valid entry only when it is true.
 
 ## Scope
 
