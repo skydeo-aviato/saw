@@ -103,8 +103,11 @@ not
 
 ## 7. Open or update
 
+Push the branch first, and name it with `--head`; without it `gh pr create` can refuse a branch that
+is already pushed.
+
 ```bash
-gh pr create --base <base> --title "<title>" --body-file "$EV/body.md" \
+gh pr create --head <branch> --base <base> --title "<title>" --body-file "$EV/body.md" \
   --attach "$EV/before.png#Before: the filter is lost on reload" \
   --attach "$EV/after.png#After: the filter survives a reload" \
   --attach "$EV/after.mp4"
@@ -120,8 +123,8 @@ files.
 ## 8. Verify the posted body
 
 ```bash
-gh pr view <number> --json body --jq .body | grep -nE '/tmp/|\]\(\./' || echo clean
+gh pr view <number> --json body --jq .body | grep -nE '!\[[^]]*\]\([^h]' || echo clean
 ```
 
-`clean` means every evidence path became a GitHub-hosted attachment. Open the PR and check each image
-and video renders. Then, if the user asked, continue with the `babysit` skill.
+`clean` means no image still points at a local path: every one became a GitHub-hosted attachment.
+Open the PR and check each image and video renders. Then, if the user asked, continue with the `babysit` skill.
