@@ -86,8 +86,9 @@ Name every ticket and PR by what it is, with the link: `[Rename scopes to readon
 (PLA-194)](https://linear.app/...)`, never a bare `PLA-194` or `#122`.
 
 Reference each evidence file by the exact path you will pass to `--attach`:
-`![After: the filter survives a reload](/tmp/pr-ev/console-saved-filters/after.png)`. `gh` swaps that
-path for the uploaded URL. Use the repository's own words from `GLOSSARY.md` or `CONTEXT.md` where
+`![After: the filter survives a reload](/tmp/pr-ev/console-saved-filters/after.png)`. Videos use the
+same image syntax, `![walkthrough](/tmp/pr-ev/console-saved-filters/after.mp4)`. `gh` swaps each
+reference for the uploaded URL; a file the body does not reference this way lands at the end. Use the repository's own words from `GLOSSARY.md` or `CONTEXT.md` where
 they exist.
 
 ## 6. Title
@@ -123,8 +124,8 @@ files.
 ## 8. Verify the posted body
 
 ```bash
-gh pr view <number> --json body --jq .body | grep -nE '!\[[^]]*\]\([^h]' || echo clean
+gh pr view <number> --json body --jq .body | grep -nF "$EV/" || echo clean
 ```
 
-`clean` means no image still points at a local path: every one became a GitHub-hosted attachment.
+`clean` means no reference still points into `$EV`: every file became a GitHub-hosted attachment.
 Open the PR and check each image and video renders. Then, if the user asked, continue with the `babysit` skill.
