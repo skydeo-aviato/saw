@@ -53,5 +53,5 @@ Copyright Skydeo, Inc. Licensed MIT. The only skills here that are ours:
 
 | Command | |
 | --- | --- |
-| `/saw:ship` | our text, [Theo Browne](https://www.youtube.com/@t3dotgg) |
+| `/saw:ship` | our text, [Theo Browne](https://www.youtube.com/@t3dotgg); PR body and its visuals adapted from Matt Pocock's [`pr`](https://github.com/mattpocock/skills/tree/v1.3.1/skills/engineering/pr) (MIT, `v1.3.1`), which credits Dex Horthy's [`show-me`](https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md) (Humanlayer) |
 | `/saw:babysit` | our text, [Theo Browne](https://www.youtube.com/@t3dotgg) |
